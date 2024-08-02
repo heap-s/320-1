@@ -18,7 +18,7 @@ class Selection{
         System.out.println("Enter a letter of the alphabet without whitespace: ");
         String letter = scan.next();
 
-        switch(chars){
+        switch(letter){
             case "a":
                 System.out.println("You entered a");
                 break;
@@ -48,8 +48,9 @@ class Selection{
                 System.out.println("The result is 3");
                 break;
             default:
-                continue;
+                scan.close();
+                break;
         }
-        return result;
+
     }
 }
