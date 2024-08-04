@@ -11,7 +11,7 @@ public class Average {
 
         if (income < 500) {
             taxRate = .10;
-            double withholding = (income * taxRate);
+            double withholding = income * taxRate;
             System.out.println("Weekly withholding is: " + withholding);
         } else if (income >= 500 && income < 1500) {
             taxRate = .15;
