@@ -7,23 +7,23 @@ public class Average {
         Scanner scan = new Scanner(System.in);
 
         int income = scan.nextInt();
-        double taxrate;
+        double taxRate;
 
         if (income < 500) {
-            taxrate = .10;
-            double withholding = (income * taxrate);
+            taxRate = .10;
+            double withholding = (income * taxRate);
             System.out.println("Weekly withholding is: " + withholding);
         } else if (income >= 500 && income < 1500) {
-            taxrate = .15;
-            double withholding = income * taxrate;
+            taxRate = .15;
+            double withholding = income * taxRate;
             System.out.println("Weekly withholding is: " + withholding);
         } else if (income >= 1500 && income < 2500) {
-            taxrate = .20;
-            double withholding = income * taxrate;
+            taxRate = .20;
+            double withholding = income * taxRate;
             System.out.println("Weekly withholding is: " + withholding);
         } else {
-            taxrate = .30;
-            double withholding = income * taxrate;
+            taxRate = .30;
+            double withholding = income * taxRate;
             System.out.println("Weekly withholding is: " + withholding);
         }
 
