@@ -10,18 +10,23 @@ public class Loop {
 
         for (int i = 0; i < 10; i++){
             curr = scan.nextFloat();
-            System.out.println(i);
             total += curr;
-            if(curr <= min){
+
+            if (curr > 100.0 || curr < 0){
+                System.out.println("Grades cannot be greater than 100.0");
+                throw new IllegalArgumentException("Number out of range: " + curr);
+            }
+            else if(curr <= min){
                 min = curr;
             }
-            if (curr >= max){
+            else if (curr >= max){
                max = curr;
             }
         }
-        System.out.println(min);
-        System.out.println(max);
-        System.out.println(total);
+        float average = total / 10;
+        System.out.println("The average is: " + average);
+        System.out.println("The minimum score is: " + min);
+        System.out.println("The maximum score is: " + max);
 
     }
 }
