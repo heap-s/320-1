@@ -5,6 +5,7 @@ public class Average {
         Scanner scan = new Scanner(System.in);
 
         int income = scan.nextInt();
+        scan.close();
         double taxRate;
 
         if (income < 500) {

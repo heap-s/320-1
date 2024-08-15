@@ -10,6 +10,7 @@ public class Loop {
 
         for (int i = 0; i < 10; i++){
             curr = scan.nextFloat();
+            scan.close();
             total += curr;
 
             if (curr > 100.0 || curr < 0){
