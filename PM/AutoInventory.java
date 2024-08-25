@@ -10,6 +10,8 @@ public class AutoInventory {
     
     private static ArrayList<AutoInventory> inventory = new ArrayList<>();
 
+    public AutoInventory() {}
+
     public AutoInventory(String make, String model, String color, int year, int mileage) {
         this.make = make;
         this.model = model;
