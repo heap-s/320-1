@@ -2,90 +2,106 @@ package PP;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Scanner scan = new Scanner(System.in);
-        while (true){
-            AutoInventory inventory = new AutoInventory();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        AutoInventory inventory = new AutoInventory();
+
+        while (true) {
             System.out.println("Welcome to the Auto Inventory System");
             System.out.println("1. Add Vehicle");
             System.out.println("2. Remove Vehicle");
             System.out.println("3. Update Vehicle");
-            System.out.println("4. Get Inventory");
-            System.out.println("5. Exit"); 
-            int choice = scan.nextInt();
+            System.out.println("4. Print Inventory");
+            System.out.println("5. Write to File");
+            System.out.println("6. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
             switch (choice) {
                 case 1:
-                    try {
-                        System.out.println("Enter the make of the vehicle");
-                        String make = scan.next();
-                        System.out.println("Enter the model of the vehicle");
-                        String model = scan.next();
-                        System.out.println("Enter the color of the vehicle");
-                        String color = scan.next();
-                        System.out.println("Enter the year of the vehicle");
-                        int year = scan.nextInt();
-                        System.out.println("Enter the mileage of the vehicle");
-                        int mileage = scan.nextInt();
-                        inventory.addVehicle(make, model, color, year, mileage);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid input. Please try again.");
-                    }
+                    addVehicle(scanner, inventory);
                     break;
                 case 2:
-                    try {
-                        System.out.println("Enter the index of the vehicle to remove");
-                        inventory.printInventory();
-                        int index = scan.nextInt();
-                        inventory.removeVehicle(index);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid input. Please try again.");
-                    }
+                    removeVehicle(scanner, inventory);
                     break;
                 case 3:
-                    try {
-                        System.out.println("Enter the make of the vehicle to update");
-                        String make = scan.next();
-                        System.out.println("Enter the model of the vehicle to update");
-                        String model = scan.next();
-                        System.out.println("Enter the color of the vehicle to update");
-                        String color = scan.next();
-                        System.out.println("Enter the year of the vehicle to update");
-                        int year = scan.nextInt();
-                        System.out.println("Enter the mileage of the vehicle to update");
-                        int mileage = scan.nextInt();
-                        inventory.updateVehicle(make, model, color, year, mileage);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid input. Please try again.");
-                    }
+                    updateVehicle(scanner, inventory);
                     break;
                 case 4:
-                    try {
-                        inventory.getInventory();
-                    } catch (Exception e) {
-                        System.out.println("Error getting inventory. Please try again.");
-                    }
+                    inventory.printInventory();
                     break;
                 case 5:
-                    System.out.println("Would you like to write the inventory to a file? (y/n)");
-                    String write = scan.next();
-                    if (write.equals("y") || write.equals("Y")) {
-                        try{
-                            inventory.writeToFile();
-                        }catch(Exception e){
-                            System.out.println("Error writing to file. Please try again.");
-                        }
-                    }else if (write.equals("n") || write.equals("N")){
-                        try{
-                            inventory.printInventory();
-                        }catch(Exception e){
-                            System.out.println("Error printing inventory. Please try again.");
-                        }
-                    }
-                    System.out.println("Thank you for using the Auto Inventory System");
-                    System.exit(0);
-                    scan.close();
+                    inventory.writeToFile();
                     break;
+                case 6:
+                    exitProgram(scanner, inventory);
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+    private static void addVehicle(Scanner scanner, AutoInventory inventory) {
+        System.out.println("Enter the make of the vehicle");
+        String make = scanner.nextLine();
+        System.out.println("Enter the model of the vehicle");
+        String model = scanner.nextLine();
+        System.out.println("Enter the color of the vehicle");
+        String color = scanner.nextLine();
+        System.out.println("Enter the year of the vehicle");
+        int year = scanner.nextInt();
+        System.out.println("Enter the mileage of the vehicle");
+        int mileage = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        String result = inventory.addVehicle(make, model, color, year, mileage);
+        System.out.println(result);
+    }
+
+    private static void removeVehicle(Scanner scanner, AutoInventory inventory) {
+        System.out.println("Enter the index of the vehicle to remove");
+        inventory.printInventory();
+        int index = scanner.nextInt() - 1;
+        scanner.nextLine(); // Consume newline
+
+        String result = inventory.removeVehicle(index);
+        System.out.println(result);
+    }
+
+    private static void updateVehicle(Scanner scanner, AutoInventory inventory) {
+        System.out.println("Enter the index of the vehicle to update");
+        inventory.printInventory();
+        int index = scanner.nextInt() - 1;
+        scanner.nextLine(); // Consume newline
+
+        System.out.println("Enter the make of the vehicle to update");
+        String make = scanner.nextLine();
+        System.out.println("Enter the model of the vehicle to update");
+        String model = scanner.nextLine();
+        System.out.println("Enter the color of the vehicle to update");
+        String color = scanner.nextLine();
+        System.out.println("Enter the year of the vehicle to update");
+        int year = scanner.nextInt();
+        System.out.println("Enter the mileage of the vehicle to update");
+        int mileage = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        String result = inventory.updateVehicle(index,make, model, color, year, mileage);
+        System.out.println(result);
+    }
+
+
+    private static void exitProgram(Scanner scanner, AutoInventory inventory) {
+        System.out.println("Would you like to write the inventory to a file? (y/n)");
+        String write = scanner.nextLine().toLowerCase();
+        if (write.equals("y") || write.equals("Y")) {
+            inventory.writeToFile();
+        } else {
+            inventory.printInventory();
+        }
+        System.out.println("Thank you for using the Auto Inventory System");
+        scanner.close();
     }
 }
